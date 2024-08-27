@@ -15,13 +15,20 @@ jobs:
     strategy:
       matrix:
         node-version: [18.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-    
+
     steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install pnpm
+        run: |
+          npm install -g pnpm
+
       - run: pnpm install
-        name: 'Install Dependencies'
-      - run: pnpm build:my-company
-        name: 'building my-company'
       - run: | 
           if [ $? -ne 0 ]; then
             exit 1
