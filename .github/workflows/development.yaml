@@ -19,9 +19,9 @@ jobs:
     
     steps:
       - run: pnpm install
-        displayName: 'Install Dependencies'
+        name: 'Install Dependencies'
       - run: pnpm build:my-company
-        displayName: 'building my-company'
+        name: 'building my-company'
       - run: | 
           if [ $? -ne 0 ]; then
             exit 1
@@ -30,7 +30,7 @@ jobs:
         name: buildAndPrepareMyCompany
     # - publish: dist/apps/basic
     #   artifact: basic-web
-    #   displayName: Publish artifact
+    #   name: Publish artifact
 
 
 
