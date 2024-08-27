@@ -62,5 +62,4 @@ jobs:
 #           npm install -g pnpm
 
 #       - run: pnpm install
-
-      # - run: pnpm nx affected --target=build --base=origin/develop --head=HEAD
+# - run: pnpm nx affected --target=build --base=origin/develop --head=HEAD
