@@ -33,7 +33,7 @@ jobs:
           if [ $? -ne 0 ]; then
             exit 1
           fi
-          cd ./dist/apps/my-company
+          cd dist/apps/my-company
         name: buildAndPrepareMyCompany
     # - publish: dist/apps/basic
     #   artifact: basic-web
