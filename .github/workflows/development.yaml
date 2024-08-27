@@ -8,26 +8,52 @@ on:
     branches:
       - develop
 
-jobs:
+jobs: 
   build:
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [18.x]
-
+        node-version: [18.x, 20.x, 22.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+    
     steps:
-      - uses: actions/checkout@v2
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ matrix.node-version }}
-
-      - name: Install pnpm
-        run: |
-          npm install -g pnpm
-
       - run: pnpm install
+        displayName: 'Install Dependencies'
+      - run: pnpm build:my-company
+        displayName: 'building my-company'
+      - run: | 
+          if [ $? -ne 0 ]; then
+            exit 1
+          fi
+          cd ./dist/apps/my-company
+        name: buildAndPrepareMyCompany
+    # - publish: dist/apps/basic
+    #   artifact: basic-web
+    #   displayName: Publish artifact
 
-      - run: pnpm nx affected --target=build --base=origin/develop --head=HEAD
+
+
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+
+#     strategy:
+#       matrix:
+#         node-version: [18.x]
+
+#     steps:
+#       - uses: actions/checkout@v2
+
+#       - name: Set up Node.js
+#         uses: actions/setup-node@v2
+#         with:
+#           node-version: ${{ matrix.node-version }}
+
+#       - name: Install pnpm
+#         run: |
+#           npm install -g pnpm
+
+#       - run: pnpm install
+
+      # - run: pnpm nx affected --target=build --base=origin/develop --head=HEAD
