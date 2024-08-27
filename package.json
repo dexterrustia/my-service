@@ -2,7 +2,10 @@
   "name": "@my-service/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "dev:my-company": "npx nx dev my-company --port 3100",
+    "build:my-company": "npx nx build my-company"
+  },
   "private": true,
   "dependencies": {
     "@emotion/react": "11.11.1",
